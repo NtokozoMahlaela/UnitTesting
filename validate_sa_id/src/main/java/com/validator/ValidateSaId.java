@@ -90,21 +90,30 @@ public class ValidateSaId {
     }
 
     public static void main(String[] args) {
-        String idToTest = "0210075733084";
+        String idToTest;
+        if (args.length > 0) {
+            idToTest = args[0];
+        } else {
+            idToTest = "0210075733084"; // default
+        }
 
         System.out.println("Testing ID: " + idToTest);
         System.out.println("Is valid: " + isIdNumberValid(idToTest));
-        
-        // Break down the components
-        System.out.println("\nBreaking down the ID number:");
-        System.out.println("Date of Birth: " + idToTest.substring(0, 6) + " (YYMMDD)");
-        
-        int genderCode = Integer.parseInt(idToTest.substring(6, 10));
-        System.out.println("Gender Code: " + genderCode + " (" + (genderCode <= FEMALE_GENDER_CODE_MAX ? "Female" : "Male") + ")");
-        
-        char citizenshipStatus = idToTest.charAt(10);
-        System.out.println("Citizenship Status: " + citizenshipStatus + " (" + (citizenshipStatus == '0' ? "SA Citizen" : "Permanent Resident") + ")");
-        
-        System.out.println("Check Digits: " + idToTest.substring(11));
+
+        if (idToTest.length() == 13 && idToTest.matches("\\d+")) {
+            // Break down the components
+            System.out.println("\nBreaking down the ID number:");
+            System.out.println("Date of Birth: " + idToTest.substring(0, 6) + " (YYMMDD)");
+
+            int genderCode = Integer.parseInt(idToTest.substring(6, 10));
+            System.out.println("Gender Code: " + genderCode + " (" + (genderCode <= FEMALE_GENDER_CODE_MAX ? "Female" : "Male") + ")");
+
+            char citizenshipStatus = idToTest.charAt(10);
+            System.out.println("Citizenship Status: " + citizenshipStatus + " (" + (citizenshipStatus == '0' ? "SA Citizen" : "Permanent Resident") + ")");
+
+            System.out.println("Check Digits: " + idToTest.substring(11));
+        } else {
+            System.out.println("Unable to break down ID number: input not 13 digits or contains non-numeric characters.");
+        }
     }
 }
