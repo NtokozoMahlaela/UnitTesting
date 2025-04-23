@@ -94,7 +94,7 @@ public class ValidateSaId {
         if (args.length > 0) {
             idToTest = args[0];
         } else {
-            idToTest = "0210075733084"; // default
+            idToTest = "0123456789123"; // default
         }
 
         System.out.println("Testing ID: " + idToTest);
