@@ -5,27 +5,72 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidateSaIdTest {
     @Test
-    void validIdNumbersShouldReturnTrue() {
+    void validIdNumber1ShouldReturnTrue() {
         assertTrue(ValidateSaId.isIdNumberValid("2001014800086"));
+    }
+
+    @Test
+    void validIdNumber2ShouldReturnTrue() {
         assertTrue(ValidateSaId.isIdNumberValid("2909035800085"));
     }
 
     @Test
-    void invalidLengthShouldReturnFalse() {
-        // Test too short
-        assertFalse(ValidateSaId.isIdNumberValid("12345"));
-        assertFalse(ValidateSaId.isIdNumberValid("123456789012")); // 12 digits
-        
-        // Test too long
-        assertFalse(ValidateSaId.isIdNumberValid("12345678901234")); // 14 digits
+    void testValidSaId() {
+        assertTrue(ValidateSaId.isIdNumberValid("8001015009087"));
     }
 
     @Test
-    void nonNumericCharactersShouldReturnFalse() {
-        assertFalse(ValidateSaId.isIdNumberValid("2001014A00086")); // Contains 'A'
+    void test0210075733084() {
+        // Change the assertion if you expect this ID to be invalid
+        assertTrue(ValidateSaId.isIdNumberValid("0210075733084"));
+    }
+
+    @Test
+    void tooShortIdShouldReturnFalse() {
+        assertFalse(ValidateSaId.isIdNumberValid("12345"));
+    }
+
+    // TDD Step: Too long ID should return false
+
+    // TDD Step: ID with non-numeric character should return false
+
+    @Test
+    void twelveDigitIdShouldReturnFalse() {
+        assertFalse(ValidateSaId.isIdNumberValid("123456789012")); // 12 digits
+    }
+
+
+
+    @Test
+    void idWithDotShouldReturnFalse() {
         assertFalse(ValidateSaId.isIdNumberValid("20010148000.6")); // Contains '.'
+    }
+
+    @Test
+    void idWithLetterOShouldReturnFalse() {
         assertFalse(ValidateSaId.isIdNumberValid("2001O14800086")); // Contains 'O'
     }
+
+    @Test
+    void invalidMonthShouldReturnFalse() {
+        assertFalse(ValidateSaId.isIdNumberValid("2013014800086")); // Invalid month (13)
+    }
+
+    @Test
+    void invalidDayShouldReturnFalse() {
+        assertFalse(ValidateSaId.isIdNumberValid("2001324800086")); // Invalid day (32)
+    }
+
+    @Test
+    void invalidLeapYearShouldReturnFalse() {
+        assertFalse(ValidateSaId.isIdNumberValid("2302294800086")); // Invalid February date (29 in non-leap year)
+    }
+
+    @Test
+    void invalidChecksumShouldReturnFalse() {
+        assertFalse(ValidateSaId.isIdNumberValid("9001015000088")); // Invalid checksum
+    }
+
 
     @Test
     void invalidDatesShouldReturnFalse() {

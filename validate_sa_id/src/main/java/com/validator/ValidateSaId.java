@@ -63,6 +63,28 @@ public class ValidateSaId {
         }
     }
 
+    /**
+     * Calculates the Luhn checksum digit for a given 12-digit base string.
+     * @param base12 The first 12 digits of the SA ID.
+     * @return The Luhn checksum digit (0-9).
+     */
+    public static int calculateLuhnChecksumDigit(String base12) {
+        int sum = 0;
+        boolean alternate = false;
+        for (int i = base12.length() - 1; i >= 0; i--) {
+            int digit = Character.getNumericValue(base12.charAt(i));
+            if (alternate) {
+                digit *= 2;
+                if (digit > 9) {
+                    digit -= 9;
+                }
+            }
+            sum += digit;
+            alternate = !alternate;
+        }
+        return (10 - (sum % 10)) % 10;
+    }
+
     private static boolean validateLuhnChecksum(String idNumber) {
         int sum = 0;
         boolean alternate = false;
