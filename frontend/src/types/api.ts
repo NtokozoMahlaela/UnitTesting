@@ -3,6 +3,7 @@ export interface IdInformation {
   idNumber: string;
   birthDate: string;
   age: number;
+  ageCategory: string;
   gender: string;
   citizenship: string;
   zodiacSign: string;
