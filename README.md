@@ -6,10 +6,8 @@ A professional, enterprise-grade South African ID number validation system with 
 
 ### ✨ **Major Improvements**
 - **Complete UI Redesign**: Modern glassmorphism interface with gradients and animations
-- **Fixed API Routes**: Resolved 404 errors with unified `/api/*` endpoints
 - **Perfect ID Validation**: Luhn algorithm working flawlessly for all real South African IDs
 - **Enhanced Analytics**: Beautiful dashboard with real-time statistics and charts
-- **Mobile Optimization**: Responsive design with dedicated mobile footer summary
 
 ### � **Key Features**
 - **Instant Validation**: < 100ms response time with complete data extraction
@@ -28,17 +26,11 @@ A professional, enterprise-grade South African ID number validation system with 
 - `POST /api/id-validation/validate` - Validate single ID
 - `GET /api/analytics/overview` - Validation statistics
 - `GET /api/health` - Service health check
--  All endpoints use consistent `/api/*` prefix
-
-## 🛠 **Technology Stack**
-
-**Backend**: Spring Boot, PostgreSQL, Redis, JWT  
-**Frontend**: React, TypeScript, Tailwind CSS, Framer Motion
 
 
 ## 📞 **Contact**
 
-- **Email**: Ntokozomahlaela.gmail
+- **Email**: Ntokozomahlaela.gmail.com
 - **Phone**: +27 637372178
 - **Location**: Johannesburg, South Africa
 
@@ -91,23 +83,6 @@ A professional, enterprise-grade South African ID number validation system with 
 - **API Documentation**: http://localhost:8080/swagger-ui.html
 - **Health Check**: http://localhost:8080/api/health
 
-
-## Architecture
-
-```
-┌─────────────────┐    ┌──────────────────┐
-│   Frontend    │    │    Backend       │
-│   (React)     │◄──►│   (Spring Boot) │
-│   Port: 3000  │    │   Port: 8080   │
-└─────────────────┘    └──────────────────┘
-         │                       │
-         ▼                       ▼
-    ┌─────────────────┐    ┌──────────────────┐
-    │   PostgreSQL   │    │     Redis       │
-    │   (Database)  │◄──►│   (Cache)      │
-    └─────────────────┘    └──────────────────┘
-```
-
 ## Real User Ready
 
 This application is designed for **real users** with:
@@ -136,7 +111,6 @@ This application is designed for **real users** with:
 - **📊 Monitoring**: Prometheus metrics and Grafana dashboards
 - **🚀 CI/CD Pipeline**: Automated testing, building, and deployment
 
-## 🏗️ Architecture
 
 ### Technology Stack
 
@@ -148,37 +122,9 @@ This application is designed for **real users** with:
 - **Spring Security** - Authentication and authorization
 - **OpenAPI/Swagger** - API documentation
 
-#### Frontend
-- **React 18** - Modern UI library
-- **Tailwind CSS** - Utility-first CSS framework
-- **Framer Motion** - Smooth animations
-- **Recharts** - Data visualization
-- **React Query** - Data fetching and caching
-- **Axios** - HTTP client
 
-#### DevOps & Infrastructure
-- **Docker** - Containerization
-- **Docker Compose** - Multi-container orchestration
-- **GitHub Actions** - CI/CD pipeline
-- **Prometheus** - Metrics collection
-- **Grafana** - Monitoring dashboards
-- **Nginx** - Reverse proxy and load balancing
 
-### System Design
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   React App     │    │   Spring Boot   │    │   PostgreSQL    │
-│   (Frontend)    │◄──►│   (Backend)     │◄──►│   (Database)    │
-│   Port: 3000    │    │   Port: 8080    │    │   Port: 5432    │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                                ▼
-                       ┌─────────────────┐
-                       │     Redis       │
-                       │   (Cache)       │
-                       │   Port: 6379    │
-                       └─────────────────┘
-```
+
 
 
