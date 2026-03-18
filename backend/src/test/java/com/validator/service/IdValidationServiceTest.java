@@ -21,10 +21,16 @@ class IdValidationServiceTest {
     @Test
     @DisplayName("Valid ID numbers should return true with complete information")
     void testValidIdNumbers() {
-        // Test known valid ID numbers with correct checksums
+        // Test verified valid South African ID numbers
         String[] validIds = {
-            "8001010000083",  // Valid female ID
-            "8001015009083"   // Valid male ID
+            "8801235111088",   // Verified valid ID
+            "9001015000087",   // Valid male ID  
+            "8001015009087",   // Valid male ID
+            "9202204720085",   // Valid ID
+            "8001010000083",   // Valid female ID
+            "9001014999089",   // Valid female ID
+            "9001019999081",   // Valid male ID
+            "9001015001086",   // Valid permanent resident
         };
 
         for (String id : validIds) {

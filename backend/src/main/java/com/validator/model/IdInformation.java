@@ -17,6 +17,7 @@ public class IdInformation {
     private String idNumber;
     private LocalDate birthDate;
     private Integer age;
+    private String ageCategory;
     private Gender gender;
     private CitizenshipStatus citizenship;
     private String zodiacSign;
