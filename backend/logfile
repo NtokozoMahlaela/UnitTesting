@@ -1,0 +1,2 @@
+2026-03-16 10:50:57 SAST LOG:  redirecting log output to logging collector process
+2026-03-16 10:50:57 SAST HINT:  Future log output will appear in directory "log".

@@ -1,0 +1,64 @@
+# Environment variables - NEVER commit these files!
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+.env.*.bak
+.env.*.temp
+.env.*.backup
+
+# Application specific environment files
+application-local.yml
+application-local.properties
+application-dev.yml
+application-dev.properties
+
+# Gradle - Large files and distributions
+gradle-wrapper.zip
+gradle.zip
+gradle-*/
+
+# Build outputs
+dist/
+build/
+target/
+out/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+target/
+
+# Database
+*.db
+*.sqlite
+
+# Temporary files
+*.tmp
+*.temp
+
+# Gradle
+.gradle/
+
+# Java
+*.class
+
+# Application specific
+application-local.yml
