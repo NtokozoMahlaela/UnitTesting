@@ -1,0 +1,9 @@
+{
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "java -jar backend/build/libs/*.jar",
+    "healthcheckPath": "/api/id-validation/health"
+  }
+}
