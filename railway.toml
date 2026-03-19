@@ -1,0 +1,6 @@
+web: java -jar backend/build/libs/*.jar
+services:
+  - type: postgres
+    name: postgres
+  - type: redis
+    name: redis
