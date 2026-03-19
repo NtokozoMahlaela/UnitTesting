@@ -1,10 +1,13 @@
 #!/bin/bash
 set -e
 
-# Build the backend
-echo "Building backend..."
+# Make gradlew executable
+chmod +x backend/gradlew
+
+# Build the application
+echo "Building application..."
 cd backend
-./gradlew clean build -x test
+./gradlew clean build -x test --no-daemon
 cd ..
 
 echo "Build completed successfully!"

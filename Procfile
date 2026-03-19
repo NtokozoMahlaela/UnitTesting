@@ -1,1 +1,1 @@
-web: java -jar backend/build/libs/*.jar
+web: ./backend/gradlew bootJar && java -jar backend/build/libs/*.jar
