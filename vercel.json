@@ -6,22 +6,18 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "frontend/build"
       }
     },
     {
       "src": "backend/Dockerfile",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "gradle build -x test",
-        "outputDirectory": "build/libs"
-      }
+      "use": "@vercel/docker"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "http://localhost:8080/api/$1"
+      "dest": "http://backend:8080/api/$1"
     },
     {
       "src": "/(.*)",
@@ -29,10 +25,9 @@
     }
   ],
   "env": {
-    "SPRING_DATASOURCE_URL": "postgresql://user:password@localhost:5432/sa_id_validator",
-    "SPRING_DATASOURCE_USERNAME": "postgres",
+    "SPRING_DATASOURCE_URL": "postgresql://user:password@host:5432/database",
+    "SPRING_DATASOURCE_USERNAME": "postgres", 
     "SPRING_DATASOURCE_PASSWORD": "password",
-    "SPRING_DATA_REDIS_HOST": "localhost",
-    "SPRING_DATA_REDIS_PORT": "6379"
+    "JWT_SECRET": "bXlTZWNyZXRLZXlGb3JKVFRUb2tlblZhbGlkYXRpb24xMjM0NTY3ODkw"
   }
 }
