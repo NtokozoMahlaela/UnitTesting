@@ -1,0 +1,35 @@
+services:
+  # Frontend Service
+  - type: web
+    name: sa-id-validator-frontend
+    env: node
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm start
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /api/(.*)
+        destination: /api
+
+  # Backend Service  
+  - type: worker
+    name: sa-id-validator-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: https://dpg-db-xxxxx.railway.app:7654
+      - key: SPRING_DATASOURCE_USERNAME
+        value: postgres
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: password
+      - key: SPRING_DATA_REDIS_HOST
+        value: redis:6379
+      - key: SPRING_DATA_REDIS_PORT
+        value: 6379
+      - key: JWT_SECRET
+        value: your-jwt-secret-here
+      - key: SERVER_PORT
+        value: 8080
