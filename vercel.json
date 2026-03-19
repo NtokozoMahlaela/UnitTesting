@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "name": "sa-id-validator",
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api"
+    }
+  ],
+  "env": {
+    "REACT_APP_API_URL": "https://sa-id-validator.vercel.app/api"
+  },
+  "functions": {
+    "api/index.js": {
+      "runtime": "nodejs18.x",
+      "handler": "api/index.js"
+    }
+  }
+}
