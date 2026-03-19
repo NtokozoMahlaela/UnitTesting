@@ -1,33 +1,34 @@
-# Use a build stage with Maven
-FROM maven:3.9-openjdk-17-slim AS build
+# Use a build stage with Gradle
+FROM gradle:8-jdk17 AS build
 
 # Set working directory
 WORKDIR /app
 
-# Copy pom.xml and download dependencies
-COPY pom.xml .
-RUN mvn dependency:go-offline -B
+# Copy gradle files and download dependencies
+COPY build.gradle settings.gradle ./
+COPY gradle ./gradle
+RUN gradle dependencies --configuration compileClasspath
 
 # Copy source code
 COPY src ./src
 
 # Build the application
-RUN mvn clean package -DskipTests
+RUN gradle clean build -x test
 
 # Use a runtime stage with OpenJDK
-FROM openjdk:17-jre-slim
+FROM eclipse-temurin:17-jre-alpine
 
 # Install curl for health checks
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache curl
 
 # Set working directory
 WORKDIR /app
 
 # Copy the built jar from build stage
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/build/libs/*.jar app.jar
 
 # Create non-root user
-RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+RUN addgroup -S appgroup && adduser -S -G appgroup appuser
 RUN chown -R appuser:appgroup /app
 USER appuser
 
