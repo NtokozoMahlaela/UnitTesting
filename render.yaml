@@ -1,0 +1,35 @@
+services:
+  # Backend Spring Boot Service
+  - type: web
+    name: sa-id-validator-backend
+    env: java
+    repo: https://github.com/NtokozoMahlaela/UnitTesting.git
+    rootDir: backend
+    buildCommand: ./gradlew build -x test
+    startCommand: java -jar build/libs/*.jar
+    healthCheckPath: /api/health
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: sa-id-validator-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: sa-id-validator-db
+          property: username
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: sa-id-validator-db
+          property: password
+      - key: JWT_SECRET
+        value: bXlTZWNyZXRLZXlGb3JKVFRUb2tlblZhbGlkYXRpb24xMjM0NTY3ODkw
+
+  # PostgreSQL Database
+  - type: pserv
+    name: sa-id-validator-db
+    plan: free
+    ipAllowList: []
+
+databases:
+  - name: sa-id-validator-db
+    plan: free
