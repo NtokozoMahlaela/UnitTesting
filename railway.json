@@ -1,11 +1,11 @@
 {
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "./backend/gradlew build -x test",
+    "buildCommand": "cd backend && ./gradlew build -x test",
     "watchPatterns": ["backend/src/**", "frontend/src/**"]
   },
   "deploy": {
-    "startCommand": "java -jar backend/build/libs/*.jar",
+    "startCommand": "cd backend && java -jar build/libs/*.jar",
     "healthcheckPath": "/api/id-validation/health",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
