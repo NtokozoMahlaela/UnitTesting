@@ -4,18 +4,13 @@ FROM gradle:8-jdk17 AS build
 # Set working directory
 WORKDIR /app
 
-# Copy gradle wrapper first for better caching
-COPY gradlew gradlew.bat ./
-COPY gradle ./gradle
+# Copy all files first for better caching
+COPY . .
 
-# Copy gradle files and download dependencies
-COPY build.gradle settings.gradle ./
+# Download dependencies
 RUN ./gradlew dependencies --configuration compileClasspath
 
-# Copy source code
-COPY src ./src
-
-# Build the application
+# Build application
 RUN ./gradlew clean build -x test
 
 # Use a runtime stage with OpenJDK
@@ -27,7 +22,7 @@ RUN apk add --no-cache curl
 # Set working directory
 WORKDIR /app
 
-# Copy the built jar from build stage
+# Copy built jar from build stage
 COPY --from=build /app/build/libs/*.jar app.jar
 
 # Create non-root user

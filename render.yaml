@@ -5,7 +5,7 @@ services:
     env: docker
     repo: https://github.com/NtokozoMahlaela/UnitTesting.git
     rootDir: backend
-    dockerContextPath: ./backend
+    dockerContextPath: .
     dockerfilePath: ./backend/Dockerfile
     healthCheckPath: /api/health
     envVars:
