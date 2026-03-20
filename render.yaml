@@ -2,11 +2,11 @@ services:
   # Backend Spring Boot Service
   - type: web
     name: sa-id-validator-backend
-    env: docker
+    env: java
     repo: https://github.com/NtokozoMahlaela/UnitTesting.git
     rootDir: backend
-    dockerContextPath: .
-    dockerfilePath: ./backend/Dockerfile
+    buildCommand: ./gradlew build -x test
+    startCommand: java -jar build/libs/*.jar
     healthCheckPath: /api/health
     envVars:
       - key: SPRING_DATASOURCE_URL
