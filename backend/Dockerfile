@@ -4,16 +4,19 @@ FROM gradle:8-jdk17 AS build
 # Set working directory
 WORKDIR /app
 
+# Copy gradle wrapper first for better caching
+COPY gradlew gradlew.bat ./
+COPY gradle ./gradle
+
 # Copy gradle files and download dependencies
 COPY build.gradle settings.gradle ./
-COPY gradle ./gradle
-RUN gradle dependencies --configuration compileClasspath
+RUN ./gradlew dependencies --configuration compileClasspath
 
 # Copy source code
 COPY src ./src
 
 # Build the application
-RUN gradle clean build -x test
+RUN ./gradlew clean build -x test
 
 # Use a runtime stage with OpenJDK
 FROM eclipse-temurin:17-jre-alpine
@@ -37,7 +40,7 @@ EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
-  CMD curl -f http://localhost:8080/api/v1/id-validation/health || exit 1
+  CMD curl -f http://localhost:8080/api/health || exit 1
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
