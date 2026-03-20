@@ -6,28 +6,14 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "frontend/build"
+        "distDir": "frontend/dist"
       }
-    },
-    {
-      "src": "backend/Dockerfile",
-      "use": "@vercel/docker"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "http://backend:8080/api/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/frontend/$1"
     }
-  ],
-  "env": {
-    "SPRING_DATASOURCE_URL": "postgresql://user:password@host:5432/database",
-    "SPRING_DATASOURCE_USERNAME": "postgres", 
-    "SPRING_DATASOURCE_PASSWORD": "password",
-    "JWT_SECRET": "bXlTZWNyZXRLZXlGb3JKVFRUb2tlblZhbGlkYXRpb24xMjM0NTY3ODkw"
-  }
+  ]
 }
