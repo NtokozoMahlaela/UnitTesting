@@ -41,6 +41,7 @@ gradle-app.setting
 # Spring Boot
 application-local.properties
 application-local.yml
+bin/main/application.yml
 
 # Database
 *.db
